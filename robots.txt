@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Replace YOUR-SITE with your real Netlify (or GitHub Pages) address.
-Sitemap: https://YOUR-SITE.netlify.app/sitemap.xml
+Sitemap: https://tshifhiwa-kota-king.netlify.app/sitemap.xml

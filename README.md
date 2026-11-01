@@ -1,8 +1,11 @@
 # Tshifhiwa's Kota King
 
 A multi-page website for a local kota (South African street-food sandwich) takeaway with two outlets: Madabani Village (Limpopo) and Erica Flat, Sunnyside (Pretoria). Student project built in three parts: HTML structure (Part 1), CSS and responsive design (Part 2), and JavaScript, SEO and deployment (Part 3).
+ 
+**Live site:**  `https://tshifhiwa-kota-king.netlify.app`
 
-
+**Repository:** `https://github.com/Kingsley-0322/Tshifhiwa-s-kota-king-part-3-of-POE`
+ 
 ## Pages
 | Page | Purpose |
 |---|---|
@@ -50,7 +53,7 @@ A multi-page website for a local kota (South African street-food sandwich) takea
 1. Push the project to a GitHub repository (see Git workflow).
 2. On Netlify choose *Add new site → Import an existing project*, pick the repository, leave the build command empty and set the publish directory to `/`.
 3. In Netlify, open *Forms* to confirm the `enquiry` form was detected, and add an email notification.
-4. Replace every `YOUR-SITE.netlify.app` in the HTML files, `robots.txt` and `sitemap.xml` with the real address, then push again.
+4.  Replace the stand-in address in the HTML files, `robots.txt` and `sitemap.xml` with the real Netlify address, then push again.
 
 ## Git workflow
 Commit regularly with descriptive messages, for example: `Add menu search, filter and sort`, `Add FAQ accordion to About page`, `Add Leaflet map to Contact page`, `Add form validation and quote calculator`, `Add robots.txt, sitemap and security headers`, `Update README for Part 3`.
