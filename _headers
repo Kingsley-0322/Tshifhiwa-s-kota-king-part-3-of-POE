@@ -1,0 +1,8 @@
+# Netlify security headers (applies to every page).
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=()
+  Strict-Transport-Security: max-age=31536000
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://unpkg.com https://tile.openstreetmap.org; connect-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'

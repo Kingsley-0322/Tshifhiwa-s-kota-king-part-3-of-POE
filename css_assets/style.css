@@ -1,0 +1,659 @@
+/* ==========================================================================
+   Tshifhiwa's Kota King — Design System
+   Palette inspired by the kota itself: crusty bread, curry-red atchar,
+   mustard chip spice, pickled-green relish, deep polony brown.
+
+   Part 2 update: layouts that used to be inline `style="display:grid..."`
+   in the HTML have been moved into real classes here, so media queries
+   can actually override them on smaller screens. Inline styles always
+   beat external stylesheet rules, even inside a media query, so leaving
+   the layout inline meant the site could never truly go responsive.
+   ========================================================================== */
+
+/* Fonts are loaded with <link> tags in each page <head> (faster than @import). */
+
+:root {
+  /* Colour tokens */
+  --paper:        #F2E8D3;   /* warm parchment / brown-paper bag */
+  --paper-dark:   #E8DAB9;   /* slightly deeper panel tone */
+  --ink:          #2B2118;   /* near-black warm charcoal, main text */
+  --crust:        #5C2E1A;   /* deep crust brown, headings/borders */
+  --chilli:       #C1440E;   /* burnt-orange atchar red, primary accent */
+  --chilli-dark:  #9A3509;   /* pressed/hover state */
+  --mustard:      #E8A93A;   /* chip-spice yellow, secondary accent */
+  --relish:       #6B7C3D;   /* pickled green, tertiary accent */
+  --cream:        #FBF6EA;   /* lightest surface, cards */
+
+  /* Type */
+  --font-display: 'Bungee', system-ui, sans-serif;
+  --font-body: 'Work Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Spacing scale (relative units so it scales with root font-size) */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6rem;
+
+  --radius: 6px;
+  --max-width: 1120px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 6px rgba(43, 33, 24, 0.12);
+  --shadow-md: 0 6px 18px rgba(43, 33, 24, 0.18);
+  --shadow-lg: 0 12px 28px rgba(43, 33, 24, 0.22);
+}
+
+/* ---- Reset & base ---- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem; /* ~17px, but relative so it respects user browser settings */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+a { color: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 var(--space-2);
+  color: var(--crust);
+  letter-spacing: 0.01em;
+}
+
+h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); }
+h3 { font-size: 1.25rem; }
+
+p { margin: 0 0 var(--space-2); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--chilli);
+  display: inline-block;
+  margin-bottom: var(--space-1);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+/* ==========================================================================
+   Layout primitives (Flexbox / Grid)
+   These replace the inline `style="display:grid; grid-template-columns..."`
+   that used to live in the HTML. Using classes means every breakpoint
+   below can genuinely reflow these sections on tablet/mobile.
+   ========================================================================== */
+
+/* Two-column split, wider left column (hero sections, about intro) */
+.split-12 {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+/* Even two-column split (mission/vision, contact details + form) */
+.split-11 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+/* Even two-column split with wider right column (menu hero, contact form) */
+.split-21 {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-4);
+}
+
+/* Auto-fit card grid: as many equal columns as fit, min 220px each.
+   This alone makes the 3-card and 4-image galleries responsive without
+   needing a separate rule per breakpoint. */
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* Simple flex row that wraps (buttons, CTA groups) */
+.flex-row {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.flex-row-center {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Row that stacks into a column (price list rows, footer contact lines) */
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+/* Column stack with consistent gap */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.stack-lg {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Media/image frame used for photo cards */
+.media-card {
+  padding: 0;
+  overflow: hidden;
+}
+.media-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.media-card img.short { height: 220px; }
+.media-card img.tall { height: 260px; }
+
+.prose-measure { max-width: 60ch; }
+.prose-measure-wide { max-width: 42ch; }
+
+/* CTA / dark strip section */
+.cta-strip {
+  background: var(--crust);
+  color: var(--paper);
+  text-align: center;
+}
+.cta-strip h2 { color: var(--mustard); }
+.cta-strip .btn-outline {
+  border-color: var(--paper);
+  color: var(--paper);
+}
+.cta-strip p {
+  max-width: 50ch;
+  margin: 0 auto var(--space-3);
+  opacity: 0.9;
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.85em 1.6em;
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-primary {
+  background: var(--chilli);
+  color: var(--cream);
+}
+.btn-primary:hover { background: var(--chilli-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-primary:focus-visible { outline: 3px solid var(--mustard); outline-offset: 2px; }
+.btn-primary:active { background: var(--chilli-dark); transform: translateY(0); box-shadow: var(--shadow-sm); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--crust);
+  border-color: var(--crust);
+  box-shadow: none;
+}
+.btn-outline:hover { background: var(--crust); color: var(--cream); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-outline:active { transform: translateY(0); box-shadow: none; }
+
+/* ---- Header / Nav ---- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  border-bottom: 3px solid var(--crust);
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: var(--crust);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logo span { color: var(--chilli); }
+
+.nav-links {
+  display: flex;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--ink);
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  color: var(--chilli);
+  border-color: var(--chilli);
+}
+.nav-links a:active { color: var(--chilli-dark); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 2px solid var(--crust);
+  border-radius: var(--radius);
+  padding: 0.4em 0.6em;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.nav-toggle:active { box-shadow: none; transform: translateY(1px); }
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--crust);
+  color: var(--paper);
+  margin-top: var(--space-6);
+  padding: var(--space-5) 0 var(--space-3);
+}
+
+.site-footer a { color: var(--mustard); text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.site-footer a:focus-visible { outline: 2px solid var(--mustard); outline-offset: 2px; }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.footer-grid h4 {
+  color: var(--mustard);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.footer-grid ul { list-style: none; margin: 0; padding: 0; }
+.footer-grid li { margin-bottom: 0.5em; font-size: 0.92rem; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(242,232,211,0.2);
+  padding-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgba(242,232,211,0.6);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+/* ---- Section utility ---- */
+.section { padding: var(--space-6) 0; }
+.section-tight { padding: var(--space-5) 0; }
+.section-alt { background: var(--paper-dark); }
+
+/* ---- Divider (kota-layer motif) ---- */
+.layer-divider {
+  display: flex;
+  height: 10px;
+  width: 100%;
+}
+.layer-divider span { flex: 1; }
+.layer-divider .l1 { background: var(--crust); }
+.layer-divider .l2 { background: var(--chilli); }
+.layer-divider .l3 { background: var(--mustard); }
+.layer-divider .l4 { background: var(--relish); }
+
+/* ---- Cards ---- */
+.card {
+  background: var(--cream);
+  border: 2px solid var(--crust);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+/* Cards that behave like clickable/hoverable tiles (feature cards, menu items) */
+.card-hover:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+.card-hover:active {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(0);
+}
+
+/* Highlighted card variant (e.g. the flagship menu item) */
+.card-featured {
+  border-color: var(--chilli);
+  border-width: 3px;
+  box-shadow: var(--shadow-md);
+}
+
+.tag-loaded {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  background: var(--chilli);
+  color: var(--cream);
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+/* ---- Forms ---- */
+.form-field {
+  margin-bottom: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.form-field label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--crust);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.75em 0.9em;
+  border: 2px solid var(--crust);
+  border-radius: var(--radius);
+  background: var(--cream);
+  color: var(--ink);
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.form-field input:hover,
+.form-field select:hover,
+.form-field textarea:hover {
+  border-color: var(--chilli);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: 3px solid var(--mustard);
+  outline-offset: 1px;
+}
+
+.form-note {
+  font-size: 0.85rem;
+  color: var(--crust);
+  opacity: 0.75;
+}
+
+.required { color: var(--chilli); }
+
+/* ---- Map frame ---- */
+.map-frame {
+  padding: 0;
+  overflow: hidden;
+}
+.map-frame iframe {
+  width: 100%;
+  height: 380px;
+  border: 0;
+  display: block;
+}
+
+/* ==========================================================================
+   Responsive design
+   Breakpoints: desktop (default, no query needed) → tablet (<= 900px)
+   → mobile (<= 600px). Widths use relative units (%, fr, ch) throughout,
+   so the grid tracks and text measures already flex between these points;
+   the media queries below mainly handle when multi-column layouts should
+   collapse and when the nav should switch to its mobile menu.
+   ========================================================================== */
+
+/* ---- Tablet ---- */
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+
+  .split-12,
+  .split-11,
+  .split-21 {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .media-card img,
+  .media-card img.tall {
+    height: 240px;
+  }
+
+  .section { padding: var(--space-5) 0; }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 600px) {
+  body { font-size: 1rem; }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 3px solid var(--crust);
+    flex-direction: column;
+    padding: var(--space-3);
+    gap: var(--space-2);
+    display: none;
+  }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: inline-block; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: var(--space-3); }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .grid-auto {
+    grid-template-columns: 1fr;
+  }
+
+  .row-between {
+    flex-direction: column;
+  }
+  .row-between .eyebrow { align-self: flex-start; }
+
+  .media-card img,
+  .media-card img.short,
+  .media-card img.tall {
+    height: 200px;
+  }
+
+  .flex-row,
+  .flex-row-center {
+    justify-content: center;
+  }
+}
+
+/* ---- Accessibility ---- */
+:focus-visible { outline: 3px solid var(--mustard); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* ==========================================================================
+   PART 3 additions
+   ========================================================================== */
+
+/* ---- Typography (Part 2 feedback: "typography could be improved") ----
+   A fluid modular scale so every heading and text level shrinks smoothly
+   between mobile and desktop instead of jumping at a breakpoint. */
+:root {
+  --step--1: clamp(0.8rem, 0.77rem + 0.15vw, 0.9rem);
+  --step-0:  clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1:  clamp(1.2rem, 1.1rem + 0.5vw, 1.45rem);
+  --step-2:  clamp(1.5rem, 1.3rem + 1vw, 2.1rem);
+  --step-3:  clamp(1.85rem, 1.45rem + 2vw, 2.9rem);
+  --step-4:  clamp(2.15rem, 1.5rem + 3.2vw, 3.8rem);
+}
+body { font-size: var(--step-0); line-height: 1.65; font-variant-numeric: lining-nums; }
+h1 { font-size: var(--step-4); line-height: 1.08; letter-spacing: 0.015em; }
+h2 { font-size: var(--step-3); line-height: 1.12; }
+h3 { font-size: var(--step-1); line-height: 1.25; }
+h4 { font-size: var(--step--1); }
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+.eyebrow, .btn, .nav-links, .form-field label { font-size: var(--step--1); }
+.lead { font-size: var(--step-1); line-height: 1.5; max-width: 52ch; }
+.container > p, .card p { max-width: 68ch; }
+.container p a, .form-note a { text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.container p a:hover { color: var(--chilli); }
+.price { font-family: var(--font-mono); font-weight: 600; font-size: var(--step-1); color: var(--chilli); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* ---- Accessibility helpers ---- */
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip-link { position: absolute; left: var(--space-2); top: -4rem; z-index: 100; background: var(--crust); color: var(--cream); padding: 0.6em 1em; border-radius: var(--radius); transition: top 0.15s ease; }
+.skip-link:focus { top: var(--space-1); }
+
+/* ---- One page-load moment: hero text rises in once ---- */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.intro > * { animation: rise 0.6s ease both; }
+.intro > *:nth-child(2) { animation-delay: 0.08s; }
+.intro > *:nth-child(3) { animation-delay: 0.16s; }
+.intro > *:nth-child(4) { animation-delay: 0.24s; }
+
+/* ---- Menu search / filter / sort ---- */
+.menu-controls { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-2); margin-bottom: var(--space-2); }
+.menu-controls .form-field { margin-bottom: 0; }
+.menu-count { font-family: var(--font-mono); font-size: var(--step--1); margin-bottom: var(--space-2); }
+.menu-item h3 { margin-bottom: 0.3em; }
+.menu-item p { margin: 0; }
+
+/* ---- Accordion ---- */
+.accordion { display: flex; flex-direction: column; gap: var(--space-1); margin-top: var(--space-3); }
+.accordion-item { background: var(--cream); border: 2px solid var(--crust); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+.accordion-item h3 { margin: 0; font-size: var(--step-1); }
+.accordion-trigger { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); text-align: left; background: none; border: 0; padding: var(--space-2) var(--space-3); font: inherit; font-family: var(--font-body); font-weight: 600; color: var(--crust); cursor: pointer; }
+.accordion-trigger::after { content: "+"; font-family: var(--font-mono); font-size: 1.4em; line-height: 1; transition: transform 0.25s ease; }
+.accordion-trigger:hover { color: var(--chilli); }
+.accordion-trigger:active { background: var(--paper-dark); }
+.accordion-item.open .accordion-trigger::after { transform: rotate(45deg); }
+.accordion-panel { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows 0.3s ease, visibility 0.3s; }
+.accordion-item.open .accordion-panel { grid-template-rows: 1fr; visibility: visible; }
+.accordion-panel > div { overflow: hidden; }
+.accordion-panel p { margin: 0; padding: 0 var(--space-3) var(--space-2); }
+
+/* ---- Lightbox ---- */
+.lightbox-trigger { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.lightbox-trigger img { transition: transform 0.25s ease; }
+.lightbox-trigger:hover img { transform: scale(1.03); }
+.media-card .lightbox-trigger { overflow: hidden; }
+dialog.lightbox { width: min(92vw, 880px); max-height: 94vh; padding: var(--space-2); background: var(--cream); border: 3px solid var(--crust); border-radius: var(--radius); box-shadow: var(--shadow-lg); }
+dialog.lightbox::backdrop { background: rgba(43, 33, 24, 0.82); }
+dialog.lightbox[open] { animation: rise 0.25s ease; }
+dialog.lightbox figure { margin: 0; }
+dialog.lightbox img { width: 100%; max-height: 66vh; object-fit: contain; border-radius: 4px; }
+dialog.lightbox figcaption { margin-top: var(--space-1); font-size: var(--step--1); }
+.lightbox-close { position: absolute; top: 0.4rem; right: 0.6rem; z-index: 2; width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 2px solid var(--crust); background: var(--cream); color: var(--crust); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+.lightbox-close:hover { background: var(--chilli); color: var(--cream); }
+.lightbox-nav { display: flex; justify-content: space-between; gap: var(--space-1); margin-top: var(--space-2); }
+
+/* ---- Forms: errors, results, quote ---- */
+.form-error { color: #9A1B1B; font-size: var(--step--1); font-weight: 600; }
+.form-error::before { content: "Problem: "; }
+.form-field input[aria-invalid="true"], .form-field select[aria-invalid="true"], .form-field textarea[aria-invalid="true"] { border-color: #9A1B1B; box-shadow: 0 0 0 2px rgba(154, 27, 27, 0.25); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+.btn[disabled] { opacity: 0.6; cursor: wait; transform: none; }
+.result-panel { margin-top: var(--space-3); border-color: var(--relish); }
+.result-panel:focus { outline: 3px solid var(--mustard); outline-offset: 2px; }
+.quote-list { display: grid; grid-template-columns: 1fr auto; gap: 0.4em var(--space-2); margin: 0 0 var(--space-2); }
+.quote-list dt, .quote-list dd { margin: 0; }
+.quote-list dd { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.quote-list .quote-total, .quote-list dt:last-of-type { font-weight: 700; border-top: 2px solid var(--crust); padding-top: 0.4em; }
+.availability { font-weight: 600; padding: 0.7em 0.9em; border-radius: var(--radius); border-left: 6px solid; }
+.availability.is-ok { background: #EAF0DA; border-color: var(--relish); }
+.availability.is-no { background: #F8E1D6; border-color: var(--chilli); }
+
+/* ---- Interactive map ---- */
+.map-controls { margin-bottom: var(--space-2); }
+#map { height: 420px; width: 100%; }
+.map-frame .leaflet-container { font-family: var(--font-body); }
+
+@media (max-width: 900px) {
+  .menu-controls { grid-template-columns: 1fr 1fr; }
+  .menu-controls .field-search { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .menu-controls, .form-row { grid-template-columns: 1fr; }
+  #map { height: 320px; }
+  .nav-links a { display: block; padding: 0.5rem 0; }
+  .accordion-trigger { padding: var(--space-2); }
+  dialog.lightbox { width: 96vw; padding: var(--space-1); }
+}

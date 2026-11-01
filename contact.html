@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact & Locations | Tshifhiwa's Kota King</title>
+<meta name="description" content="Find Tshifhiwa's Kota King in Madabani Village, Limpopo and Sunnyside, Pretoria. Opening hours, phone numbers, an interactive map and a message form.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5C2E1A">
+<link rel="canonical" href="https://YOUR-SITE.netlify.app/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tshifhiwa's Kota King">
+<meta property="og:title" content="Contact & Locations | Tshifhiwa's Kota King">
+<meta property="og:description" content="Find Tshifhiwa's Kota King in Madabani Village, Limpopo and Sunnyside, Pretoria. Opening hours, phone numbers, an interactive map and a message form.">
+<meta property="og:url" content="https://YOUR-SITE.netlify.app/contact.html">
+<meta property="og:image" content="https://YOUR-SITE.netlify.app/_images/kota-stack-outdoor.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A5%AA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=IBM+Plex+Mono:wght@500;600&family=Work+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css_assets/style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="logo">Tshifhiwa's <span>Kota King</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu ☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="products.html">Menu</a></li>
+      <li><a href="enquiries.html">Enquiries</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="layer-divider"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div>
+
+<main id="main">
+
+<section class="section-tight">
+  <div class="container">
+    <span class="eyebrow">Find Us</span>
+    <h1>Come say hi.</h1>
+    <p class="prose-measure" style="font-size: 1.05rem;">
+      Reach us by phone, or find us at one of our locations below.
+    </p>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section class="section-tight section-alt">
+  <div class="container split-11">
+
+    <div class="card">
+      <span class="eyebrow">Main Store</span>
+      <h3>Madabani Village</h3>
+      <p style="margin-bottom:0.3em;">Madabani Village<br>Limpopo, South Africa</p>
+      <p style="margin-bottom:1em;"><strong>Hours:</strong> Mon–Sat, 10:00–20:00</p>
+      <a href="tel:0764985798" class="btn btn-outline">Call 076 498 5798</a>
+    </div>
+
+    <div class="card">
+      <span class="eyebrow">Second Outlet</span>
+      <h3>Erica Flat</h3>
+      <p style="margin-bottom:0.3em;">115 Erica Street<br>Sunnyside</p>
+      <p style="margin-bottom:1em;"><strong>Hours:</strong> Mon–Sat, 10:00–20:00</p>
+      <a href="tel:0793219299" class="btn btn-outline">Call 079 321 9299</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="section-tight" aria-labelledby="map-heading">
+  <div class="container">
+    <h2 id="map-heading">Find us on the map</h2>
+    <div class="map-controls flex-row" role="group" aria-label="Choose an outlet to show">
+      <button type="button" class="btn btn-outline" data-outlet="madabani">Madabani Village</button>
+      <button type="button" class="btn btn-outline" data-outlet="erica">Erica Flat, Sunnyside</button>
+      <button type="button" class="btn btn-outline" data-outlet="both">Show both</button>
+    </div>
+    <div class="card map-frame">
+      <div id="map" role="region" aria-label="Map of Tshifhiwa's Kota King outlets"></div>
+    </div>
+    <noscript><p>The interactive map needs JavaScript. <a href="https://www.google.com/maps/search/?api=1&amp;query=115+Erica+Street+Sunnyside+Pretoria">Open Erica Flat in Google Maps</a>.</p></noscript>
+  </div>
+</section>
+
+<!-- CONTACT DETAILS + FORM -->
+<section class="section-tight">
+  <div class="container split-21">
+
+    <div>
+      <h2>Contact Details</h2>
+      <p><strong>Phone:</strong><br>076 498 5798<br>079 321 9299</p>
+      <p><strong>Email:</strong><br>hello@kotaking.co.za</p>
+      <p><strong>Hours:</strong><br>Monday – Saturday, 10:00 – 20:00<br>Closed Sundays</p>
+    </div>
+
+    <div>
+      <form id="contact-form" class="card" name="contact" action="mailto:hello@kotaking.co.za" method="post" enctype="text/plain" novalidate>
+        <h3 style="margin-top:0;">Send us a message</h3>
+
+        <div class="form-field">
+          <label for="c-name">Full name <span class="required">*</span></label>
+          <input type="text" id="c-name" name="name" autocomplete="name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="c-phone">Phone number <span class="required">*</span></label>
+            <input type="tel" id="c-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="076 498 5798" required>
+          </div>
+          <div class="form-field">
+            <label for="c-email">Email address <span class="required">*</span></label>
+            <input type="email" id="c-email" name="email" autocomplete="email" required>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="c-type">Type of message <span class="required">*</span></label>
+          <select id="c-type" name="message-type" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="General question">General question</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Complaint">Complaint</option>
+            <option value="Compliment">Compliment</option>
+            <option value="Other">Something else</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="c-message">Message <span class="required">*</span></label>
+          <textarea id="c-message" name="message" rows="5" maxlength="1000" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Email us</button>
+      </form>
+      <div id="contact-result" class="card result-panel" tabindex="-1" hidden></div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Tshifhiwa's Kota King</h4>
+        <p style="opacity:0.85; max-width:32ch;">Authentic, generously loaded kotas, made fresh every day.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="products.html">Menu</a></li>
+          <li><a href="enquiries.html">Enquiries</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:0764985798">076 498 5798</a></li>
+          <li><a href="tel:0793219299">079 321 9299</a></li>
+          <li>Madabani Village &amp; Sunnyside</li>
+          <li><a href="https://wa.me/27764985798" target="_blank" rel="noopener noreferrer">WhatsApp us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Tshifhiwa's Kota King. Student project.</span>
+      <span>Built with HTML &amp; CSS</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<script src="js_assets/map.js" defer></script>
+<script src="js_assets/forms.js" defer></script>
+<script src="js_assets/main.js" defer></script>
+</body>
+</html>

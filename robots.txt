@@ -1,0 +1,6 @@
+# Allow all search engines to crawl the whole site.
+User-agent: *
+Allow: /
+
+# Replace YOUR-SITE with your real Netlify (or GitHub Pages) address.
+Sitemap: https://YOUR-SITE.netlify.app/sitemap.xml
