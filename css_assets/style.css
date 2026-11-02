@@ -657,3 +657,7 @@ dialog.lightbox figcaption { margin-top: var(--space-1); font-size: var(--step--
   .accordion-trigger { padding: var(--space-2); }
   dialog.lightbox { width: 96vw; padding: var(--space-1); }
 }
+.embed-frame { padding: 0; overflow: hidden; }
+.embed-frame iframe { width: 100%; height: 900px; border: 0; display: block; }
+.embed-frame iframe.tall { height: 1800px; }
+@media (max-width: 600px) { .embed-frame iframe.tall { height: 2000px; } }
