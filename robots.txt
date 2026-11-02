@@ -2,5 +2,5 @@
 User-agent: *
 Allow: /
 
-# Replace YOUR-SITE with your real Netlify (or GitHub Pages) address.
+
 Sitemap: https://tshifhiwa-kota-king.netlify.app/sitemap.xml
